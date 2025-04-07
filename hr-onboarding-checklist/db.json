@@ -1,132 +1,10 @@
 {
   "employees": [
     {
-      "id": "475b",
-      "name": "owen",
-      "role": "market",
-      "department": "one",
-      "startDate": "2025-04-08",
-      "tasks": [
-        {
-          "id": 1,
-          "title": "Sign NDA",
-          "status": "Completed"
-        },
-        {
-          "id": 2,
-          "title": "Submit HR documents",
-          "status": "Not started"
-        },
-        {
-          "id": 3,
-          "title": "Set up email",
-          "status": "Not started"
-        },
-        {
-          "id": 4,
-          "title": "Configure integrations (Slack, etc.)",
-          "status": "Not started"
-        }
-      ]
-    },
-    {
-      "id": "810e",
-      "name": "fyssa",
-      "role": "sd",
-      "department": "ds",
-      "startDate": "2025-04-01",
-      "tasks": [
-        {
-          "id": 1,
-          "title": "Sign NDA",
-          "status": "Completed"
-        },
-        {
-          "id": 2,
-          "title": "Submit HR documents",
-          "status": "Not started"
-        },
-        {
-          "id": 3,
-          "title": "Set up email",
-          "status": "Not started"
-        },
-        {
-          "id": 4,
-          "title": "Configure integrations (Slack, etc.)",
-          "status": "In progress"
-        }
-      ]
-    },
-    {
-      "id": "3eb2",
-      "name": "first",
-      "role": "fisrt job",
-      "department": "market",
-      "startDate": "2025-04-10",
-      "tasks": [
-        {
-          "id": 1,
-          "title": "Sign NDA",
-          "status": "Completed"
-        },
-        {
-          "id": 2,
-          "title": "Submit HR documents",
-          "status": "Completed"
-        },
-        {
-          "id": 3,
-          "title": "Set up email",
-          "status": "Completed"
-        },
-        {
-          "id": 4,
-          "title": "Configure integrations (Slack, etc.)",
-          "status": "Completed"
-        },
-        {
-          "id": 1743973799534,
-          "title": "second",
-          "status": "Completed"
-        }
-      ]
-    },
-    {
-      "id": "3eb2",
-      "name": "first",
-      "role": "fisrt job",
-      "department": "market",
-      "startDate": "2025-04-10",
-      "tasks": [
-        {
-          "id": 1,
-          "title": "Sign NDA",
-          "status": "Not started"
-        },
-        {
-          "id": 2,
-          "title": "Submit HR documents",
-          "status": "Not started"
-        },
-        {
-          "id": 3,
-          "title": "Set up email",
-          "status": "Not started"
-        },
-        {
-          "id": 4,
-          "title": "Configure integrations (Slack, etc.)",
-          "status": "Not started"
-        }
-      ]
-    },
-    {
-      "id": "7572",
-      "name": "Brian",
+      "name": "features",
       "role": "AI Engineer",
       "department": "Tech",
-      "startDate": "2025-04-07",
+      "startDate": "2025-04-17",
       "tasks": [
         {
           "id": 1,
@@ -148,14 +26,14 @@
           "title": "Configure integrations (Slack, etc.)",
           "status": "Not started"
         }
-      ]
+      ],
+      "id": 1
     },
     {
-      "id": "7572",
-      "name": "Brian",
+      "name": "features",
       "role": "AI Engineer",
       "department": "Tech",
-      "startDate": "2025-04-07",
+      "startDate": "2025-04-20",
       "tasks": [
         {
           "id": 1,
@@ -177,65 +55,9 @@
           "title": "Configure integrations (Slack, etc.)",
           "status": "Not started"
         }
-      ]
-    },
-    {
-      "id": "90c9",
-      "name": "Owen 2",
-      "role": "Data Engineer",
-      "department": "Tech",
-      "startDate": "2025-04-05",
-      "tasks": [
-        {
-          "id": 1,
-          "title": "Sign NDA",
-          "status": "Not started"
-        },
-        {
-          "id": 2,
-          "title": "Submit HR documents",
-          "status": "Not started"
-        },
-        {
-          "id": 3,
-          "title": "Set up email",
-          "status": "Not started"
-        },
-        {
-          "id": 4,
-          "title": "Configure integrations (Slack, etc.)",
-          "status": "Not started"
-        }
-      ]
-    },
-    {
-      "id": "90c9",
-      "name": "Owen 2",
-      "role": "Data Engineer",
-      "department": "Tech",
-      "startDate": "2025-04-05",
-      "tasks": [
-        {
-          "id": 1,
-          "title": "Sign NDA",
-          "status": "Not started"
-        },
-        {
-          "id": 2,
-          "title": "Submit HR documents",
-          "status": "Not started"
-        },
-        {
-          "id": 3,
-          "title": "Set up email",
-          "status": "Not started"
-        },
-        {
-          "id": 4,
-          "title": "Configure integrations (Slack, etc.)",
-          "status": "Not started"
-        }
-      ]
+      ],
+      "id": 2
     }
-  ]
+  ],
+  "tasks": []
 }
