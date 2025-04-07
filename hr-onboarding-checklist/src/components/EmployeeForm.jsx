@@ -11,8 +11,6 @@ function EmployeeForm({ onAddEmployee }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newEmployee = {
-      // Do not generate ID manually if JSON Server auto-generates it;
-      // you can omit the id field, or use Date.now() if preferred.
       name,
       role,
       department,
@@ -42,37 +40,83 @@ function EmployeeForm({ onAddEmployee }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Employee Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Job Role"
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Department"
-        value={department}
-        onChange={(e) => setDepartment(e.target.value)}
-        required
-      />
-      <input
-        type="date"
-        placeholder="Start Date"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-        required
-      />
-      <button type="submit">Add Employee</button>
-    </form>
+    <div className="card max-w-lg mx-auto mt-8">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+        Add New Employee
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Name */}
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            Employee Name
+          </label>
+          <input
+            id="name"
+            type="text"
+            placeholder="e.g. Jane Doe"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Role */}
+        <div>
+          <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
+            Job Role
+          </label>
+          <input
+            id="role"
+            type="text"
+            placeholder="e.g. Software Engineer"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            required
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Department */}
+        <div>
+          <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-1">
+            Department
+          </label>
+          <input
+            id="department"
+            type="text"
+            placeholder="e.g. Engineering"
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            required
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Start Date */}
+        <div>
+          <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-1">
+            Start Date
+          </label>
+          <input
+            id="startDate"
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            required
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="btn w-full text-center"
+        >
+          Add Employee
+        </button>
+      </form>
+    </div>
   );
 }
 

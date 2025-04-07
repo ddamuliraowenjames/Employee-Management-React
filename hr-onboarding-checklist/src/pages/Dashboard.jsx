@@ -1,34 +1,41 @@
+// src/pages/Dashboard.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-    <div className="container mx-auto px-6 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800">Dashboard</h1>
+    <div className="container py-12 text-center">
+      <h1 className="text-4xl mb-8">Dashboard</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="flex flex-wrap justify-center gap-8">
         <Link
           to="/employees"
-          className="bg-blue-500 hover:bg-blue-600 text-white p-6 rounded-lg shadow flex flex-col items-center transition"
+          className="card w-64 flex flex-col items-center px-6 py-8 transition-colors duration-200 hover:bg-blue-50"
         >
-          <span className="text-xl font-semibold">Manage Employees</span>
-          <span className="mt-2 text-sm">Add, edit & track onboarding</span>
+          <span className="text-2xl font-semibold mb-2">Manage Employees</span>
+          <span className="text-sm text-gray-600">
+            Add, edit &amp; track onboarding
+          </span>
         </Link>
 
         <Link
           to="/reports"
-          className="bg-green-500 hover:bg-green-600 text-white p-6 rounded-lg shadow flex flex-col items-center transition"
+          className="card w-64 flex flex-col items-center px-6 py-8 transition-colors duration-200 hover:bg-green-50"
         >
-          <span className="text-xl font-semibold">Summary Reports</span>
-          <span className="mt-2 text-sm">Download CSV / PDF summaries</span>
+          <span className="text-2xl font-semibold mb-2">Summary Reports</span>
+          <span className="text-sm text-gray-600">
+            Download CSV / PDF summaries
+          </span>
         </Link>
 
         <Link
           to="/settings"
-          className="bg-purple-500 hover:bg-purple-600 text-white p-6 rounded-lg shadow flex flex-col items-center transition"
+          className="card w-64 flex flex-col items-center px-6 py-8 transition-colors duration-200 hover:bg-purple-50"
         >
-          <span className="text-xl font-semibold">Settings</span>
-          <span className="mt-2 text-sm">Configure your app</span>
+          <span className="text-2xl font-semibold mb-2">Settings</span>
+          <span className="text-sm text-gray-600">
+            Configure your app
+          </span>
         </Link>
       </div>
     </div>
