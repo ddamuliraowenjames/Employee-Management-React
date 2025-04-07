@@ -12,7 +12,7 @@ const EmployeeListPage = () => {
   useEffect(() => {
     async function fetchEmployees() {
       try {
-        const res = await fetch('http://localhost:5000/employees');
+        const res = await fetch('/employees');
         const data = await res.json();
         setEmployees(data);
       } catch (err) {
@@ -25,7 +25,7 @@ const EmployeeListPage = () => {
   // Add a new employee
   const handleAddEmployee = async (newEmp) => {
     try {
-      const res = await fetch('http://localhost:5000/employees', {
+      const res = await fetch('/employees', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newEmp),
@@ -54,32 +54,32 @@ const EmployeeListPage = () => {
   });
 
   return (
-    <div className="container mx-auto px-6 py-8">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">
+    <div className="container py-8">
+      <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
         Manage Employees
       </h1>
 
       {/* Add Employee Form */}
-      <div className="bg-white p-6 rounded-lg shadow mb-8">
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">
+      <div className="card mb-8">
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">
           Add New Employee
         </h2>
         <EmployeeForm onAddEmployee={handleAddEmployee} />
       </div>
 
       {/* Search & Filter */}
-      <div className="flex flex-wrap gap-4 mb-6">
+      <div className="flex flex-wrap gap-6 mb-6">
         <input
           type="text"
           placeholder="Search by name…"
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
-          className="border rounded-lg p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border border-gray-300 rounded-lg p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <select
           value={filterStatus}
           onChange={e => setFilterStatus(e.target.value)}
-          className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           <option value="">All Statuses</option>
           <option value="Not started">Not started</option>
@@ -94,13 +94,15 @@ const EmployeeListPage = () => {
           <li
             key={emp.id}
             className={`
-              flex items-center justify-between p-4 border rounded-lg transition 
+              card flex items-center justify-between
               ${isUpcoming(emp.startDate) ? 'bg-yellow-100' : 'bg-white'}
-              hover:shadow
             `}
           >
             <div>
-              <Link to={`/employee/${emp.id}`} className="text-blue-600 font-medium hover:underline">
+              <Link
+                to={`/employee/${emp.id}`}
+                className="text-blue-600 font-medium hover:underline"
+              >
                 {emp.name}
               </Link>
               <span className="ml-2 text-sm text-gray-500">({emp.role})</span>

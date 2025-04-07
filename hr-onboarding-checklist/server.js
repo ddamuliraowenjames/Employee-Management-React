@@ -6,10 +6,8 @@ const jsonServer = require('json-server');
 const app = express();
 
 // 1) JSON‑Server on root: /employees, /tasks, etc.
-const router = jsonServer.router(path.join(__dirname, 'db.json'));
-const middlewares = jsonServer.defaults();
-app.use(middlewares);
-app.use(router);
+app.use(jsonServer.defaults());
+app.use(jsonServer.router(path.join(__dirname, 'db.json')));
 
 // 2) Serve React build
 const buildPath = path.join(__dirname, 'build');
