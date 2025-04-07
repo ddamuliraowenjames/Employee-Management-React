@@ -19,7 +19,7 @@ function EmployeeForm({ onAddEmployee }) {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/employees', {
+      const response = await fetch('/employees', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newEmployee),

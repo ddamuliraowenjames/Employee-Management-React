@@ -16,12 +16,14 @@ const EmployeeDetails = () => {
     startDate: ''
   });
 
+  // Fetch employee on mount
   useEffect(() => {
-    async function fetchEmployee() {
-      try {
-        const res = await fetch(`http://localhost:5000/employees/${id}`);
+    fetch(`/employees/${id}`)
+      .then(res => {
         if (!res.ok) throw new Error('Employee not found');
-        const data = await res.json();
+        return res.json();
+      })
+      .then(data => {
         setEmployee(data);
         setEditForm({
           name: data.name,
@@ -29,17 +31,17 @@ const EmployeeDetails = () => {
           department: data.department,
           startDate: data.startDate
         });
-      } catch (err) {
+      })
+      .catch(err => {
         console.error(err);
         navigate('/');
-      }
-    }
-    fetchEmployee();
+      });
   }, [id, navigate]);
 
+  // Persist updates
   const updateEmployeeData = async (updated) => {
     try {
-      const res = await fetch(`http://localhost:5000/employees/${id}`, {
+      const res = await fetch(`/employees/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updated)
@@ -54,13 +56,12 @@ const EmployeeDetails = () => {
   };
 
   const handleStatusChange = (taskId, newStatus) => {
-    const updated = {
+    updateEmployeeData({
       ...employee,
       tasks: employee.tasks.map(t =>
         t.id === taskId ? { ...t, status: newStatus } : t
       )
-    };
-    updateEmployeeData(updated);
+    });
   };
 
   const handleAddTask = (title) => {
@@ -91,7 +92,7 @@ const EmployeeDetails = () => {
 
   const exportPDF = () => {
     const doc = new jsPDF();
-    doc.text(`Employee: ${employee.name} - ${employee.role}`, 10, 10);
+    doc.text(`Employee: ${employee.name} — ${employee.role}`, 10, 10);
     let y = 20;
     employee.tasks.forEach(t => {
       let color;
@@ -99,7 +100,7 @@ const EmployeeDetails = () => {
       else if (t.status === 'In progress') color = [255, 165, 0];
       else color = [0, 0, 0];
       doc.setTextColor(...color);
-      doc.text(`${t.title} - ${t.status}`, 10, y);
+      doc.text(`${t.title} — ${t.status}`, 10, y);
       y += 10;
     });
     doc.save(`${employee.name}_tasks.pdf`);
@@ -107,21 +108,22 @@ const EmployeeDetails = () => {
 
   if (!employee) {
     return (
-      <div className="container mx-auto px-6 py-8">
-        <p className="text-gray-600">Loading...</p>
+      <div className="container py-8 text-center">
+        <p className="text-gray-600">Loading…</p>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-6 py-8">
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">
+    <div className="container py-8 space-y-8">
+      {/* Employee Info */}
+      <div className="card">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
           Employee Details
         </h2>
 
         {isEditing ? (
-          <form onSubmit={handleSave} className="space-y-4 mb-6">
+          <form onSubmit={handleSave} className="space-y-4">
             <input
               name="name"
               value={editForm.name}
@@ -157,43 +159,38 @@ const EmployeeDetails = () => {
             <div className="flex space-x-4">
               <button
                 type="submit"
-                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition"
+                className="btn bg-green-500 hover:bg-green-600 w-full"
               >
                 Save
               </button>
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg transition"
+                className="btn bg-gray-300 hover:bg-gray-400 text-gray-800 w-full"
               >
                 Cancel
               </button>
             </div>
           </form>
         ) : (
-          <div className="mb-6 space-y-2">
-            <p>
-              <span className="font-semibold">Name:</span> {employee.name}
-            </p>
-            <p>
-              <span className="font-semibold">Role:</span> {employee.role}
-            </p>
-            <p>
-              <span className="font-semibold">Department:</span> {employee.department}
-            </p>
-            <p>
-              <span className="font-semibold">Start Date:</span> {employee.startDate}
-            </p>
+          <div className="space-y-2 mb-6">
+            <p><span className="font-semibold">Name:</span> {employee.name}</p>
+            <p><span className="font-semibold">Role:</span> {employee.role}</p>
+            <p><span className="font-semibold">Department:</span> {employee.department}</p>
+            <p><span className="font-semibold">Start Date:</span> {employee.startDate}</p>
             <button
               onClick={() => setIsEditing(true)}
-              className="mt-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition"
+              className="btn bg-blue-500 hover:bg-blue-600"
             >
               Edit Employee Info
             </button>
           </div>
         )}
+      </div>
 
-        <h3 className="text-xl font-semibold mb-4 text-gray-700">
+      {/* Onboarding Checklist */}
+      <div className="card">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Onboarding Checklist
         </h3>
         <ul className="space-y-3 mb-6">
@@ -227,20 +224,20 @@ const EmployeeDetails = () => {
         </ul>
 
         <div className="mb-6">
-          <h4 className="font-semibold mb-2 text-gray-700">Add Custom Task</h4>
+          <h4 className="font-semibold text-gray-700 mb-2">Add Custom Task</h4>
           <NewTaskForm onAddTask={handleAddTask} />
         </div>
 
         <div className="flex space-x-4">
           <button
             onClick={exportCSV}
-            className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+            className="btn bg-indigo-500 hover:bg-indigo-600"
           >
             Export as CSV
           </button>
           <button
             onClick={exportPDF}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
+            className="btn bg-red-500 hover:bg-red-600"
           >
             Export as PDF
           </button>

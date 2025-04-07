@@ -57,6 +57,93 @@
         }
       ],
       "id": 2
+    },
+    {
+      "name": "DDAMULIRA ",
+      "role": "Software Engineer",
+      "department": "Technology",
+      "startDate": "2025-04-09",
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Sign NDA",
+          "status": "Not started"
+        },
+        {
+          "id": 2,
+          "title": "Submit HR documents",
+          "status": "Not started"
+        },
+        {
+          "id": 3,
+          "title": "Set up email",
+          "status": "Not started"
+        },
+        {
+          "id": 4,
+          "title": "Configure integrations (Slack, etc.)",
+          "status": "Not started"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "name": "DDAMULIRA ",
+      "role": "Software Engineer",
+      "department": "Technology",
+      "startDate": "2025-04-03",
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Sign NDA",
+          "status": "Not started"
+        },
+        {
+          "id": 2,
+          "title": "Submit HR documents",
+          "status": "Not started"
+        },
+        {
+          "id": 3,
+          "title": "Set up email",
+          "status": "Not started"
+        },
+        {
+          "id": 4,
+          "title": "Configure integrations (Slack, etc.)",
+          "status": "Not started"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "name": "Owen",
+      "role": "AI Engineer",
+      "department": "Tech",
+      "startDate": "2025-04-11",
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Sign NDA",
+          "status": "Not started"
+        },
+        {
+          "id": 2,
+          "title": "Submit HR documents",
+          "status": "Not started"
+        },
+        {
+          "id": 3,
+          "title": "Set up email",
+          "status": "Not started"
+        },
+        {
+          "id": 4,
+          "title": "Configure integrations (Slack, etc.)",
+          "status": "Not started"
+        }
+      ],
+      "id": 5
     }
   ],
   "tasks": []
