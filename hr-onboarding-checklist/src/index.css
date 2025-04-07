@@ -1,12 +1,43 @@
+/* src/index.css */
+
+/* Tailwind v3 directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Global Styles */
-body {
-  @apply bg-gray-50 text-gray-800 m-0 antialiased font-sans;
+/*────────────────────────────────────────────────────────*/
+/* Your custom global styles (using @apply, etc.)      */
+/*────────────────────────────────────────────────────────*/
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+  body {
+    @apply bg-gray-50 text-gray-800 m-0 antialiased;
+  }
+  code {
+    @apply font-mono bg-gray-100 px-1 rounded text-sm;
+  }
 }
 
-code {
-  @apply font-mono;
+@layer components {
+  .container {
+    @apply max-w-4xl mx-auto px-6;
+  }
+  .card {
+    @apply bg-white shadow-lg rounded-lg p-6 transition-shadow duration-200;
+  }
+  .card:hover {
+    @apply shadow-xl;
+  }
+  .btn {
+    @apply inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors duration-200;
+  }
+  .btn:hover {
+    @apply bg-blue-700;
+  }
+  .nav-link {
+    @apply text-gray-600 hover:text-gray-900 px-4 py-2 font-medium transition-colors duration-150;
+  }
 }
