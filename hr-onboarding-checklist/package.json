@@ -12,6 +12,7 @@
     "server": "json-server --watch db.json --port 5000",
     "dev": "npx concurrently \"npm run server\" \"npm start\"",
     "build": "react-scripts build",
+    "build:render": "PUBLIC_URL=/ react-scripts build",
     "serve": "node server.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
