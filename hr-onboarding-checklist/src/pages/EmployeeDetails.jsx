@@ -15,6 +15,9 @@ const EmployeeDetails = () => {
     department: '',
     startDate: ''
   });
+  const [showTaskModal, setShowTaskModal] = useState(false);
+  const [taskPage, setTaskPage] = useState(1);
+  const TASK_PAGE_SIZE = 5;
 
   // Fetch employee on mount
   useEffect(() => {
@@ -92,9 +95,15 @@ const EmployeeDetails = () => {
 
   const exportPDF = () => {
     const doc = new jsPDF();
+    doc.setFontSize(18);
     doc.text(`Employee: ${employee.name} — ${employee.role}`, 10, 10);
     let y = 20;
+    doc.setFontSize(12);
     employee.tasks.forEach(t => {
+      if (y > 280) {
+        doc.addPage();
+        y = 20;
+      }
       let color;
       if (t.status === 'Completed') color = [0, 128, 0];
       else if (t.status === 'In progress') color = [255, 165, 0];
@@ -114,14 +123,36 @@ const EmployeeDetails = () => {
     );
   }
 
+  // Progress calculation
+  const totalTasks = employee.tasks.length;
+  const completedCount = employee.tasks.filter(t => t.status === 'Completed').length;
+  const progressPercent = totalTasks ? Math.round((completedCount / totalTasks) * 100) : 0;
+
+  // Paginate tasks
+  const totalTaskPages = Math.ceil(employee.tasks.length / TASK_PAGE_SIZE);
+  const pagedTasks = employee.tasks.slice(
+    (taskPage - 1) * TASK_PAGE_SIZE,
+    taskPage * TASK_PAGE_SIZE
+  );
+
   return (
     <div className="container py-8 space-y-8">
-      {/* Employee Info */}
-      <div className="card">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-          Employee Details
-        </h2>
+      {/* Action Buttons */}
+      <div className="flex space-x-4">
+        <button onClick={exportCSV} className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
+          Export CSV
+        </button>
+        <button onClick={exportPDF} className="btn bg-red-500 hover:bg-red-600 text-white">
+          Export PDF
+        </button>
+        <button onClick={() => setShowTaskModal(true)} className="btn bg-green-500 hover:bg-green-600 text-white">
+          Add Task
+        </button>
+      </div>
 
+      {/* Employee Info */}
+      <div className="card p-6">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Employee Details</h2>
         {isEditing ? (
           <form onSubmit={handleSave} className="space-y-4">
             <input
@@ -157,10 +188,7 @@ const EmployeeDetails = () => {
               required
             />
             <div className="flex space-x-4">
-              <button
-                type="submit"
-                className="btn bg-green-500 hover:bg-green-600 w-full"
-              >
+              <button type="submit" className="btn bg-green-500 hover:bg-green-600 w-full">
                 Save
               </button>
               <button
@@ -180,7 +208,7 @@ const EmployeeDetails = () => {
             <p><span className="font-semibold">Start Date:</span> {employee.startDate}</p>
             <button
               onClick={() => setIsEditing(true)}
-              className="btn bg-blue-500 hover:bg-blue-600"
+              className="btn bg-blue-500 hover:bg-blue-600 text-white"
             >
               Edit Employee Info
             </button>
@@ -188,28 +216,31 @@ const EmployeeDetails = () => {
         )}
       </div>
 
-      {/* Onboarding Checklist */}
-      <div className="card">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">
-          Onboarding Checklist
-        </h3>
-        <ul className="space-y-3 mb-6">
-          {employee.tasks.map(t => (
+      {/* Progress Bar */}
+      <div className="card p-6">
+        <h3 className="text-xl font-semibold mb-2 text-gray-800">Onboarding Progress</h3>
+        <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden mb-2">
+          <div className="bg-blue-600 h-4" style={{ width: `${progressPercent}%` }} />
+        </div>
+        <p className="text-sm">{progressPercent}% completed</p>
+      </div>
+
+      {/* Paginated Onboarding Checklist */}
+      <div className="card p-6">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Onboarding Checklist</h3>
+        <ul className="space-y-3">
+          {pagedTasks.map(t => (
             <li
               key={t.id}
-              className="flex items-center justify-between p-4 border rounded-lg shadow-sm"
+              className={`flex items-center justify-between p-4 rounded-lg shadow-sm ${
+                t.status === 'Completed'
+                  ? 'bg-green-50'
+                  : t.status === 'In progress'
+                  ? 'bg-yellow-50'
+                  : 'bg-white'
+              }`}
             >
-              <span
-                className={`font-medium ${
-                  t.status === 'Completed'
-                    ? 'text-green-600'
-                    : t.status === 'In progress'
-                    ? 'text-orange-600'
-                    : 'text-gray-800'
-                }`}
-              >
-                {t.title}
-              </span>
+              <span className="font-medium">{t.title}</span>
               <select
                 value={t.status}
                 onChange={e => handleStatusChange(t.id, e.target.value)}
@@ -223,26 +254,47 @@ const EmployeeDetails = () => {
           ))}
         </ul>
 
-        <div className="mb-6">
-          <h4 className="font-semibold text-gray-700 mb-2">Add Custom Task</h4>
-          <NewTaskForm onAddTask={handleAddTask} />
-        </div>
-
-        <div className="flex space-x-4">
+        {/* Task Pagination */}
+        <div className="flex justify-between items-center mt-4">
           <button
-            onClick={exportCSV}
-            className="btn bg-indigo-500 hover:bg-indigo-600"
+            disabled={taskPage === 1}
+            onClick={() => setTaskPage(tp => tp - 1)}
+            className="btn bg-gray-300 hover:bg-gray-400"
           >
-            Export as CSV
+            Prev
           </button>
+          <span>
+            Page {taskPage} of {totalTaskPages}
+          </span>
           <button
-            onClick={exportPDF}
-            className="btn bg-red-500 hover:bg-red-600"
+            disabled={taskPage === totalTaskPages}
+            onClick={() => setTaskPage(tp => tp + 1)}
+            className="btn bg-gray-300 hover:bg-gray-400"
           >
-            Export as PDF
+            Next
           </button>
         </div>
       </div>
+
+      {/* Add Task Modal */}
+      {showTaskModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md relative">
+            <button
+              onClick={() => setShowTaskModal(false)}
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+            >
+              ✕
+            </button>
+            <NewTaskForm
+              onAddTask={(title) => {
+                handleAddTask(title);
+                setShowTaskModal(false);
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

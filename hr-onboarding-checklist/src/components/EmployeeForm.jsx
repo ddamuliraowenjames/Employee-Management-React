@@ -16,6 +16,7 @@ function EmployeeForm({ onAddEmployee }) {
       department,
       startDate,
       tasks: predefinedTasks.map(task => ({ ...task })),
+      archived: false,    // ← soft‑delete flag
     };
 
     try {
@@ -55,7 +56,7 @@ function EmployeeForm({ onAddEmployee }) {
             type="text"
             placeholder="e.g. Jane Doe"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={e => setName(e.target.value)}
             required
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -71,7 +72,7 @@ function EmployeeForm({ onAddEmployee }) {
             type="text"
             placeholder="e.g. Software Engineer"
             value={role}
-            onChange={(e) => setRole(e.target.value)}
+            onChange={e => setRole(e.target.value)}
             required
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -87,7 +88,7 @@ function EmployeeForm({ onAddEmployee }) {
             type="text"
             placeholder="e.g. Engineering"
             value={department}
-            onChange={(e) => setDepartment(e.target.value)}
+            onChange={e => setDepartment(e.target.value)}
             required
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -102,7 +103,7 @@ function EmployeeForm({ onAddEmployee }) {
             id="startDate"
             type="date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            onChange={e => setStartDate(e.target.value)}
             required
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />

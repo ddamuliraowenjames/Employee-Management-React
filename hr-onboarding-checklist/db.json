@@ -9,12 +9,12 @@
         {
           "id": 1,
           "title": "Sign NDA",
-          "status": "Not started"
+          "status": "Completed"
         },
         {
           "id": 2,
           "title": "Submit HR documents",
-          "status": "Not started"
+          "status": "Completed"
         },
         {
           "id": 3,
@@ -25,9 +25,15 @@
           "id": 4,
           "title": "Configure integrations (Slack, etc.)",
           "status": "Not started"
+        },
+        {
+          "id": 1744016980298,
+          "title": "two",
+          "status": "Not started"
         }
       ],
-      "id": 1
+      "id": 1,
+      "archived": false
     },
     {
       "name": "features",
@@ -56,7 +62,8 @@
           "status": "Not started"
         }
       ],
-      "id": 2
+      "id": 2,
+      "archived": true
     },
     {
       "name": "DDAMULIRA ",
@@ -202,6 +209,36 @@
         }
       ],
       "id": 7
+    },
+    {
+      "name": "title",
+      "role": "AI Engineer",
+      "department": "market",
+      "startDate": "2025-04-04",
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Sign NDA",
+          "status": "Not started"
+        },
+        {
+          "id": 2,
+          "title": "Submit HR documents",
+          "status": "Not started"
+        },
+        {
+          "id": 3,
+          "title": "Set up email",
+          "status": "Not started"
+        },
+        {
+          "id": 4,
+          "title": "Configure integrations (Slack, etc.)",
+          "status": "Not started"
+        }
+      ],
+      "archived": false,
+      "id": 8
     }
   ],
   "tasks": []
